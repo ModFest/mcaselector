@@ -78,27 +78,3 @@ jobs:
         with:
           files: build/inno/Output/MCA_Selector_Setup.exe;build/libs/mcaselector-2.4.1.jar
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Checkout Wiki
-        uses: actions/checkout@v4.1.3
-        with:
-          repository: Querz/mcaselector-wiki
-          path: mcaselector-wiki
-
-      - name: Update Wiki
-        run: |
-          cd mcaselector-wiki
-          echo -n 2.4.1 > version.txt
-          ./update_version
-        shell: bash
-
-      - name: Push Wiki
-        run: |
-          cd mcaselector-wiki
-          git config --global user.name 'Querz'
-          git config --global user.email 'wiki@querz.net'
-          git config --unset-all http.https://github.com/.extraheader
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}@github.com/Querz/mcaselector-wiki
-          git commit -am "Automated version update to 2.4.1"
-          git push
-        shell: bash
