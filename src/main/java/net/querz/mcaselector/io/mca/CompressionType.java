@@ -7,11 +7,13 @@ public enum CompressionType {
 	ZLIB(2),
 	UNCOMPRESSED(3),
 	LZ4(4),
+	ZSTD(53), // Support for Fireblanket
 	NONE_EXT(-128), // indicates that the chunk data is oversized and saved in a c.x.z.mcc file
 	GZIP_EXT(-127),
 	ZLIB_EXT(-126),
 	UNCOMPRESSED_EXT(-125),
-	LZ4_EXT(-124);
+	LZ4_EXT(-124),
+	ZSTD_EXT(-75);
 
 	private final byte type;
 
@@ -39,6 +41,7 @@ public enum CompressionType {
 			case ZLIB -> ZLIB_EXT;
 			case UNCOMPRESSED -> UNCOMPRESSED_EXT;
 			case LZ4 -> LZ4_EXT;
+			case ZSTD -> ZSTD_EXT;
 			default ->
 				// this is already an external type
 				this;
