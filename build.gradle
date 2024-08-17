@@ -49,7 +49,8 @@ dependencies {
 	implementation 'org.apache.groovy:groovy-jsr223:4.0.21'
 	implementation 'org.fxmisc.richtext:richtextfx:0.11.2'
 	implementation 'org.lz4:lz4-java:1.8.0'
-  
+	implementation 'com.github.luben:zstd-jni:1.5.5-5'
+
 	shadow 'com.github.Querz:NBT:56ac2af621'
 	shadow 'com.google.code.gson:gson:2.10.1'
 	shadow 'org.xerial:sqlite-jdbc:3.45.2.0'
@@ -61,6 +62,7 @@ dependencies {
 	shadow 'org.apache.groovy:groovy-jsr223:4.0.21'
 	shadow 'org.fxmisc.richtext:richtextfx:0.11.2'
 	shadow 'org.lz4:lz4-java:1.8.0'
+	shadow 'com.github.luben:zstd-jni:1.5.5-5'
 
 	testImplementation 'junit:junit:4.13.2'
 	testImplementation 'commons-io:commons-io:2.11.0'
