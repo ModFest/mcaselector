@@ -13,6 +13,7 @@ import net.querz.nbt.io.NBTReader;
 import net.querz.nbt.io.NBTWriter;
 import net.querz.nbt.CompoundTag;
 import java.io.*;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.function.Function;
 import java.util.zip.DeflaterOutputStream;
@@ -22,7 +23,10 @@ import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
 public abstract class Chunk {
-
+	/**
+	 * Size of the original chunk in bytes, might change after saving. Used for statistics only
+	 */
+	protected int size = -1;
 	protected int timestamp;
 	protected CompoundTag data;
 	protected CompressionType compressionType;
@@ -51,6 +55,11 @@ public abstract class Chunk {
 
 		if (tag instanceof CompoundTag) {
 			data = (CompoundTag) tag;
+			if (compressionType.isExternal()) {
+				this.size = Math.clamp(Files.size(getMCCFile().toPath()), 0, Integer.MAX_VALUE);
+			} else {
+				this.size = length;
+			}
 		} else {
 			throw new IOException("unexpected chunk data tag type " + tag.getType() + ", expected " + Tag.Type.COMPOUND);
 		}
@@ -75,6 +84,11 @@ public abstract class Chunk {
 
 		if (tag instanceof CompoundTag) {
 			data = (CompoundTag) tag;
+			if (compressionType.isExternal()) {
+				this.size = Math.clamp(Files.size(getMCCFile().toPath()), 0, Integer.MAX_VALUE);
+			} else {
+				this.size = length;
+			}
 		} else {
 			throw new IOException("unexpected chunk data tag type " + tag.getType() + ", expected " + Tag.Type.COMPOUND);
 		}
@@ -92,6 +106,7 @@ public abstract class Chunk {
 
 		new NBTWriter().write(nbtOut, data);
 		nbtOut.close();
+		this.size = baos.size();
 
 		// save mcc file if chunk doesn't fit in mca file
 		if (baos.size() > 1048576) {
@@ -161,11 +176,16 @@ public abstract class Chunk {
 
 	protected <T extends Chunk> T clone(Function<Point2i, T> chunkConstructor) {
 		T clone = chunkConstructor.apply(absoluteLocation);
+		clone.size = getOriginalSize();
 		clone.compressionType = compressionType;
 		clone.timestamp = timestamp;
 		if (data != null) {
 			clone.data = data.copy();
 		}
 		return clone;
+	}
+
+	public int getOriginalSize() {
+		return this.size;
 	}
 }
