@@ -96,7 +96,7 @@ public abstract class Chunk {
 			case GZIP, GZIP_EXT -> new DataOutputStream(new BufferedOutputStream(new GZIPOutputStream(baos = new ExposedByteArrayOutputStream())));
 			case ZLIB, ZLIB_EXT -> new DataOutputStream(new BufferedOutputStream(new DeflaterOutputStream(baos = new ExposedByteArrayOutputStream())));
 			case LZ4, LZ4_EXT -> new DataOutputStream(new BufferedOutputStream(new LZ4BlockOutputStream(baos = new ExposedByteArrayOutputStream())));
-			case ZSTD, ZSTD_EXT -> new DataOutputStream(new BufferedOutputStream(new ZstdOutputStream(baos = new ExposedByteArrayOutputStream()).setLevel(7).setLong(18).setChecksum(true)));
+			case ZSTD, ZSTD_EXT -> new DataOutputStream(new BufferedOutputStream(new ZstdOutputStream(baos = new ExposedByteArrayOutputStream()).setLevel(7).setLong(18)));
 			case NONE, NONE_EXT, UNCOMPRESSED, UNCOMPRESSED_EXT -> new DataOutputStream(new BufferedOutputStream(baos = new ExposedByteArrayOutputStream()));
 		};
 
