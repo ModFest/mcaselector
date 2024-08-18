@@ -7,9 +7,10 @@ import net.querz.mcaselector.overlay.OverlayType;
 
 import java.util.Locale;
 
-public class ExistsOverlay extends Overlay {
-    public ExistsOverlay() {
-        super(OverlayType.EXISTS);
+public class ChunkExistsOverlay extends Overlay {
+    public ChunkExistsOverlay() {
+        super(OverlayType.CHUNK_EXISTS);
+        setMultiValues(new String[0]);
     }
 
     @Override
@@ -24,7 +25,7 @@ public class ExistsOverlay extends Overlay {
 
     @Override
     public String name() {
-        return "Exists";
+        return "ChunkExists";
     }
 
     @Override
