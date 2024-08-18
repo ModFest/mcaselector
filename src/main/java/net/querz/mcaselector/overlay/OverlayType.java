@@ -15,6 +15,7 @@ public enum OverlayType {
 	BLOCK_AMOUNT("#Blocks", BlockAmountOverlay::new),
 	COMPRESSED_SIZE("CompressedSize", CompressedSizeOverlay::new),
 	MCA_WASTED("McaWastedSize", McaWastedOverlay::new),
+	EXISTS("Exists", ExistsOverlay::new),
 	CUSTOM("Custom", CustomOverlay::new);
 
 	private final String name;
