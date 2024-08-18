@@ -26,6 +26,7 @@ import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
 public abstract class Chunk {
+	private final boolean FORCE_EXTERNAL = Boolean.parseBoolean(System.getenv().getOrDefault("MF_MCA_SELECTOR_FORCE_EXTERNAL", "false"));
 
 	protected int timestamp;
 	protected CompoundTag data;
@@ -103,7 +104,7 @@ public abstract class Chunk {
 		nbtOut.close();
 
 		// save mcc file if chunk doesn't fit in mca file
-		if (baos.size() > 1048576) {
+		if (baos.size() > 1048576 || FORCE_EXTERNAL) {
 			// if the chunk's version is below 2203, we throw an exception instead
 			int dataVersion = data.getInt("DataVersion");
 			if (dataVersion < 2203) {
