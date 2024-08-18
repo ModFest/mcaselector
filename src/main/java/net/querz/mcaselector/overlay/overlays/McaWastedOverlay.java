@@ -38,7 +38,7 @@ public class McaWastedOverlay extends Overlay {
 
     @Override
     public String name() {
-        return "CompressedSize";
+        return "McaWasted";
     }
 
     @Override
