@@ -13,6 +13,8 @@ public enum OverlayType {
 	DATA_VERSION("DataVersion", DataVersionOverlay::new),
 	AVERAGE_HEIGHT("AverageHeight", AverageHeightOverlay::new),
 	BLOCK_AMOUNT("#Blocks", BlockAmountOverlay::new),
+	COMPRESSED_SIZE("CompressedSize", CompressedSizeOverlay::new),
+	MCA_WASTED("McaWastedSize", McaWastedOverlay::new),
 	CUSTOM("Custom", CustomOverlay::new);
 
 	private final String name;

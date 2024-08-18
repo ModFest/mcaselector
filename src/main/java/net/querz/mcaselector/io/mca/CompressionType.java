@@ -47,4 +47,8 @@ public enum CompressionType {
 				this;
 		};
 	}
+
+	public boolean isExternal() {
+		return this.type < 0;
+	}
 }
