@@ -235,34 +235,34 @@ public class OptionBar extends BorderPane {
 	}
 
 	private void checkForUpdateAsync() {
-		new Thread(() -> {
-			String applicationVersion;
-			try {
-				applicationVersion = FileHelper.getManifestAttributes().getValue("Application-Version");
-			} catch (IOException ex) {
-				// don't check for updates if we're in dev mode
-				return;
-			}
-
-			VersionChecker checker = new VersionChecker("Querz", "mcaselector");
-			VersionChecker.VersionData data;
-			try {
-				data = checker.fetchLatestVersion();
-			} catch (Exception e) {
-				// don't show update possibility when we failed to check the version
-				return;
-			}
-
-			if (data != null && data.isNewerThan(applicationVersion)) {
-				Platform.runLater(() -> {
-					Hyperlink download = UIFactory.hyperlink("Update", data.getLink(), null);
-					download.getStyleClass().add("hyperlink-menu-update");
-					Menu updateMenu = new Menu();
-					updateMenu.setGraphic(download);
-					menuBar.getMenus().add(updateMenu);
-				});
-			}
-		}).start();
+//		new Thread(() -> {
+//			String applicationVersion;
+//			try {
+//				applicationVersion = FileHelper.getManifestAttributes().getValue("Application-Version");
+//			} catch (IOException ex) {
+//				// don't check for updates if we're in dev mode
+//				return;
+//			}
+//
+//			VersionChecker checker = new VersionChecker("Querz", "mcaselector");
+//			VersionChecker.VersionData data;
+//			try {
+//				data = checker.fetchLatestVersion();
+//			} catch (Exception e) {
+//				// don't show update possibility when we failed to check the version
+//				return;
+//			}
+//
+//			if (data != null && data.isNewerThan(applicationVersion)) {
+//				Platform.runLater(() -> {
+//					Hyperlink download = UIFactory.hyperlink("Update", data.getLink(), null);
+//					download.getStyleClass().add("hyperlink-menu-update");
+//					Menu updateMenu = new Menu();
+//					updateMenu.setGraphic(download);
+//					menuBar.getMenus().add(updateMenu);
+//				});
+//			}
+//		}).start();
 	}
 
 	private void onUpdate(TileMap tileMap) {
